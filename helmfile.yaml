@@ -1,0 +1,18 @@
+
+environments:
+  default:
+    values:
+      - ./challenge/env/dev/values.yaml
+  prod:
+    values:
+      - ./challenge/env/prod/values.yaml
+---
+releases:
+
+  - name: demonginx-{{ .Values.releaseName }}
+    chart: ./challenge
+
+  - name: demonginx-prod
+    chart: ./challenge
+    installed: {{ eq .Values.releaseName "prod" | toYaml }}
+
